@@ -1,0 +1,10 @@
+services:
+    db:
+        image: artist-db
+        build:
+            context: .
+            dockerfile: Dockerfile
+        env_file: ./.env
+        ports:
+            - 3033:5432
+        restart: always
