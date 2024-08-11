@@ -26,17 +26,50 @@ export class AppService {
     return 'rezultatul este ' + rezultat;
   }
 
-  async getAllArtwork() {
-    const allWork = await this.dbClient.raw(`select * from artistwork`);
-    console.log('toata munca: ', allWork.rows);
+  async getAllArtwork(showOnlyVisible: boolean) {
+    let command = 'select * from artistwork';
+    if (showOnlyVisible) {
+      command += ' where is_visible = true';
+    }
+
+    const allWork = await this.dbClient.raw(command);
+    // console.log('toata munca: ', allWork.rows);
     return allWork.rows;
   }
 
-  async getIsVisibleWork() {
-    const isVisibleWork = await this.dbClient.raw(
-      `select * from artistwork where is_visible = true`,
-    );
-    console.log('doar vizibile: ', isVisibleWork);
-    return isVisibleWork.rows;
+  async getArtworkById(id: number) {
+    const artwork = await this.dbClient('artistwork').where({ id }).first();
+    return artwork;
   }
+
+  async createArtwork(data: any) {
+    const newArtwork = await this.dbClient('artistwork')
+      .insert(data)
+      .returning('*');
+    return newArtwork[0];
+  }
+
+  async updateArtwork(id: number, data: any) {
+    const updateArtwork = await this.dbClient('artistwork')
+      .where({ id })
+      .update(data)
+      .returning('*');
+    return updateArtwork[0];
+  }
+
+  async deleteArtwork(id: number) {
+    const deleteArtwork = await this.dbClient('artistwork')
+      .where({ id })
+      .del()
+      .returning('*');
+    return deleteArtwork[0];
+  }
+
+  // async getIsVisibleWork() {
+  //   const isVisibleWork = await this.dbClient.raw(
+  //     `select * from artistwork where is_visible = true`,
+  //   );
+  //   // console.log('doar vizibile: ', isVisibleWork);
+  //   return isVisibleWork.rows;
+  // }
 }
