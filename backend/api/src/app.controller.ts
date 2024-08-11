@@ -14,4 +14,9 @@ export class AppController {
   getAllWork() {
     return this.appService.getAllArtwork();
   }
+
+  @Get('/visible')
+  getIsVisibleWork() {
+    return this.appService.getIsVisibleWork();
+  }
 }

@@ -31,4 +31,12 @@ export class AppService {
     console.log('toata munca: ', allWork.rows);
     return allWork.rows;
   }
+
+  async getIsVisibleWork() {
+    const isVisibleWork = await this.dbClient.raw(
+      `select * from artistwork where is_visible = true`,
+    );
+    console.log('doar vizibile: ', isVisibleWork);
+    return isVisibleWork.rows;
+  }
 }
