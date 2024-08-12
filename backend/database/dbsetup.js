@@ -15,7 +15,10 @@ const dbClient = knex({
 
 async function run() {
     await dbClient.raw(
-        `create table artistwork (
+        `
+        drop table if exists artistwork;
+        
+        create table artistwork (
             id serial primary key,
             title varchar not null,
             description varchar,
@@ -30,10 +33,10 @@ async function run() {
             'twilight', 'nice view on the horizon', '/images/twilight.jpeg', 'https://www.google.com', true
         ),
         (
-	        'night', 'falling stars on the sky', '/images/night.jpeg', 'https://www.google.com', false
+            'night', 'falling stars on the sky', '/images/night.jpeg', 'https://www.google.com', false
         ),
         (
-	        'vacation', 'time is in our favor this time', '/images/vacation.jpeg', 'https://www.google.com', true
+            'vacation', 'time is in our favor this time', '/images/vacation.jpeg', 'https://www.google.com', true
         );`
     );
 }
