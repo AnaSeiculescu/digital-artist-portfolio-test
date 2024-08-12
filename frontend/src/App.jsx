@@ -1,4 +1,4 @@
-// import "./App.css";
+import "./App.css";
 import { ArtworksManager } from "./components/ArtworksManager";
 
 function App() {

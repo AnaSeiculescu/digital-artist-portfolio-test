@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import { useState, useEffect } from "react";
 import { ProjectCard } from "./ProjectCard";
 import Box from "@mui/material/Box";
+import { HeaderMenu } from "./HeaderMenu";
 
 export function ArtworksManager() {
     const [artworks, setArtworks] = useState([]);
@@ -44,9 +45,10 @@ export function ArtworksManager() {
     return (
         <Box sx={{ width: "100vw" }}>
             <Stack sx={{ artworksStyle }}>
-                {/* <Stack sx={{ width: "100%", height: "300px", border: "3px solid red" }}></Stack> */}
+                <HeaderMenu />
                 <ResponsiveMasonry
-                    columnsCountBreakPoints={{ 480: 1, 768: 2, 1024: 3, 1300: 4 }}
+                    // columnsCountBreakPoints={{ 480: 1, 768: 2, 1100: 3, 1380: 4, 1690: 5 }}
+                    columnsCountBreakPoints={{ 380: 1, 550: 2, 930: 3, 1250: 4, 1650: 5 }}
                     style={{ margin: "25px 25px 25px 30px" }}
                 >
                     <Masonry gutter="20px">

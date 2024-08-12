@@ -30,13 +30,13 @@ async function run() {
         insert into artistwork (
             title, description, image, clientlink, is_visible
         ) values (
-            'among trees', 'nature and mystery under the colorful light', '/images/among-trees.jpg', 'https://www.google.com', true
+            'among trees', 'nature and mystery under the colorful light, playing and dancing for the Earth', '/images/among-trees.jpg', 'https://www.google.com', true
         ),
         (
             'shot', 'finding yourself after...', '/images/shot.jpg', 'https://www.google.com', true
         ),
         (
-            'minimalistic-desktop', 'what if today is not just today...what if...', '/images/minimalistic-desktop.jpg', 'https://www.google.com', true
+            'minimalistic-desktop', 'what if today is not just today, what if today would be everywhere, anytime, what if all is just today...what if...', '/images/minimalistic-desktop.jpg', 'https://www.google.com', true
         ),
         (
             'tree', 'quiet childhood, but not alone', '/images/tree.jpg', 'https://www.google.com', true
@@ -45,7 +45,7 @@ async function run() {
             'mountain-landscape', 'the gradient of nature in reverse', '/images/mountain-landscape.jpg', 'https://www.google.com', true
         ),
         (
-            'minimal', 'beautiful danger, silent nature, teamwork', '/images/minimal.jpg', 'https://www.google.com', true
+            'minimal', 'beautiful danger, silent nature, teamwork...will you come and visit', '/images/minimal.jpg', 'https://www.google.com', true
         );`
     );
 }

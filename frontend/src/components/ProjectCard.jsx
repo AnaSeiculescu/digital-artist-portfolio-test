@@ -10,44 +10,47 @@ import Divider from "@mui/material/Divider";
 
 export function ProjectCard({ title, description, image, clientlink }) {
     return (
-        <Stack>
-            <Card sx={{ boxShadow: "4" }}>
-                <CardMedia
-                    component="img"
-                    height="165"
-                    image={image}
-                    // alt={alt}
-                    sx={{
-                        boxShadow: "1",
-                        width: "330px",
-                    }}
-                />
-                <CardContent
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        flexGrow: "1",
-                        // height: "100%",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    <Stack direction="row" sx={{ justifyContent: "space-between" }}>
-                        <Typography sx={{ color: "black", fontSize: "16px", fontWeight: "800" }}>{title}</Typography>
+        <Card
+            sx={{
+                boxShadow: "4",
+                // width: "330px"
+            }}
+        >
+            <CardMedia
+                component="img"
+                height="220"
+                image={image}
+                // alt={alt}
+                sx={{
+                    boxShadow: "1",
+                    // width: "330px",
+                }}
+            />
+            <CardContent
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    flexGrow: "1",
+                    // height: "100%",
+                    justifyContent: "space-between",
+                }}
+            >
+                <Stack direction="row" sx={{ justifyContent: "space-between" }}>
+                    <Typography sx={{ color: "black", fontSize: "16px", fontWeight: "800" }}>{title}</Typography>
 
-                        <Link
-                            href={clientlink}
-                            underline="none"
-                            target="blank"
-                            sx={{ cursor: "pointer", fontWeight: "700" }}
-                        >
-                            <Chip label="clientLink" variant="filled" size="small" />
-                        </Link>
-                    </Stack>
-                    <Divider></Divider>
-                    <Typography sx={{ color: "black", fontSize: "14px" }}>{description}</Typography>
-                </CardContent>
-            </Card>
-        </Stack>
+                    <Link
+                        href={clientlink}
+                        underline="none"
+                        target="blank"
+                        sx={{ cursor: "pointer", fontWeight: "700" }}
+                    >
+                        <Chip label="visit the site" variant="filled" size="small" />
+                    </Link>
+                </Stack>
+                <Divider></Divider>
+                <Typography sx={{ color: "black", fontSize: "14px", marginTop: "25px" }}>{description}</Typography>
+            </CardContent>
+        </Card>
     );
 }
 
