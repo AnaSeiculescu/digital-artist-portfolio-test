@@ -76,15 +76,15 @@ export function ArtworksManager() {
     //         .catch((error) => console.log("error: ", error));
     // };
 
-    // const deleteArtwork = (id) => {
-    //     fetch(update_delete_URL, {
-    //         method: "DELETE",
-    //     })
-    //         .then(() => {
-    //             setArtworks(artworks.filter((artwork) => artwork.id !== id));
-    //         })
-    //         .catch((error) => console.log("error: ", error));
-    // };
+    const deleteArtwork = (id) => {
+        fetch(`http://localhost:3000/artworks/${id}`, {
+            method: "DELETE",
+        })
+            .then(() => {
+                setArtworks(artworks.filter((artwork) => artwork.id !== id));
+            })
+            .catch((error) => console.log("error: ", error));
+    };
 
     const artworksStyle = {
         width: "100%",
@@ -143,12 +143,14 @@ export function ArtworksManager() {
                     <Masonry gutter="20px">
                         {artworks.map((artwork) => (
                             <ProjectCard
+                                id={artwork.id}
                                 key={artwork.id}
                                 title={artwork.title}
                                 description={artwork.description}
                                 image={artwork.image}
                                 // alt={artwork.alt}
                                 clientlink={artwork.clientlink}
+                                handleDeleteArtwork={deleteArtwork}
                             ></ProjectCard>
                         ))}
                     </Masonry>

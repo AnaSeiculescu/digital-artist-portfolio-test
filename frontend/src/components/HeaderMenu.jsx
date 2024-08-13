@@ -50,6 +50,7 @@ export function HeaderMenu({
     handleInputChange,
     newArtwork,
     handleAddArtwork,
+    handleDeleteArtwork,
 }) {
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -108,7 +109,7 @@ export function HeaderMenu({
                     style={{ width: "260px", textAlign: "left", padding: theme.spacing(2, 3) }}
                     fontWeight="fontWeightBold"
                 >
-                    Welcome,
+                    Welcome, Ana
                     {/* {userInput.username} */}
                     {/* <Typography style={{ fontSize: "14px" }} color={mySecondaryColor}>
                         Sort your todos by date using the view on the right
@@ -121,6 +122,7 @@ export function HeaderMenu({
                     handleInputChange={handleInputChange}
                     newArtwork={newArtwork}
                     handleAddArtwork={handleAddArtwork}
+                    handleDeleteArtwork={handleDeleteArtwork}
                 />
 
                 <Button
@@ -150,4 +152,5 @@ HeaderMenu.propTypes = {
     handleInputChange: PropTypes.func,
     newArtwork: PropTypes.object,
     handleAddArtwork: PropTypes.func,
+    handleDeleteArtwork: PropTypes.func,
 };

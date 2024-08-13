@@ -24,7 +24,6 @@ export function AddWorkForm({ theme, handleInputChange, newArtwork, handleAddArt
                     Title:
                 </Typography>
                 <TextField
-                    // required
                     id="outlined-required"
                     size="small"
                     // disabled={isLoading}
@@ -40,7 +39,6 @@ export function AddWorkForm({ theme, handleInputChange, newArtwork, handleAddArt
                     Description:
                 </Typography>
                 <TextField
-                    // required
                     id="standard-multiline-static"
                     size="small"
                     // disabled={isLoading}
@@ -57,7 +55,6 @@ export function AddWorkForm({ theme, handleInputChange, newArtwork, handleAddArt
                     Image:
                 </Typography>
                 <TextField
-                    // required
                     id="outlined-required"
                     size="small"
                     // disabled={isLoading}
@@ -73,7 +70,6 @@ export function AddWorkForm({ theme, handleInputChange, newArtwork, handleAddArt
                     Client site link:
                 </Typography>
                 <TextField
-                    // required
                     id="outlined-required"
                     size="small"
                     // disabled={isLoading}
