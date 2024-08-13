@@ -15,11 +15,11 @@ export function ArtworksManager() {
         description: "",
         image: "",
         clientlink: "",
-        isVisible: true,
+        is_visible: true,
     });
 
     const readAllURL = "http://localhost:3000/artworks/all";
-    const update_delete_URL = "http://localhost:3000/artworks/${id}";
+    // const update_delete_URL = `http://localhost:3000/artworks/${id}`;
     const createURL = "http://localhost:3000/artworks";
 
     useEffect(() => {
@@ -37,8 +37,8 @@ export function ArtworksManager() {
             });
     }, []);
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
         setNewArtwork({
             ...newArtwork,
             [name]: value,
@@ -56,35 +56,35 @@ export function ArtworksManager() {
             .then((response) => response.json())
             .then((data) => {
                 setArtworks([...artworks, data]);
-                setNewArtwork({ title: "", description: "", image: "", clientlink: "", isVisible: true });
+                setNewArtwork({ title: "", description: "", image: "", clientlink: "", is_visible: true });
             })
             .catch((error) => console.log("error: ", error));
     };
 
-    const updateArtwork = (id, updatedArtwork) => {
-        fetch(update_delete_URL, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedArtwork),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setArtworks(artworks.map((artwork) => (artwork.id === id ? data : artwork)));
-            })
-            .catch((error) => console.log("error: ", error));
-    };
+    // const updateArtwork = (id, updatedArtwork) => {
+    //     fetch(update_delete_URL, {
+    //         method: "PATCH",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(updatedArtwork),
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             setArtworks(artworks.map((artwork) => (artwork.id === id ? data : artwork)));
+    //         })
+    //         .catch((error) => console.log("error: ", error));
+    // };
 
-    const deleteArtwork = (id) => {
-        fetch(update_delete_URL, {
-            method: "DELETE",
-        })
-            .then(() => {
-                setArtworks(artworks.filter((artwork) => artwork.id !== id));
-            })
-            .catch((error) => console.log("error: ", error));
-    };
+    // const deleteArtwork = (id) => {
+    //     fetch(update_delete_URL, {
+    //         method: "DELETE",
+    //     })
+    //         .then(() => {
+    //             setArtworks(artworks.filter((artwork) => artwork.id !== id));
+    //         })
+    //         .catch((error) => console.log("error: ", error));
+    // };
 
     const artworksStyle = {
         width: "100%",
@@ -129,6 +129,9 @@ export function ArtworksManager() {
                     handleDrawerOpen={handleDrawerOpen}
                     handleDrawerClose={handleDrawerClose}
                     theme={theme}
+                    handleInputChange={handleInputChange}
+                    newArtwork={newArtwork}
+                    handleAddArtwork={addArtwork}
                 >
                     <Main open={open}></Main>
                 </HeaderMenu>

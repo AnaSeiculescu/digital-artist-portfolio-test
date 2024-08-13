@@ -12,6 +12,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import { styled } from "@mui/material/styles";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { AddWorkForm } from "./AddWorkForm";
 
 const drawerWidth = 320;
 
@@ -41,7 +42,15 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     justifyContent: "space-between",
 }));
 
-export function HeaderMenu({ theme, open, handleDrawerOpen, handleDrawerClose }) {
+export function HeaderMenu({
+    theme,
+    open,
+    handleDrawerOpen,
+    handleDrawerClose,
+    handleInputChange,
+    newArtwork,
+    handleAddArtwork,
+}) {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="fixed" sx={{ opacity: "0.85", backgroundColor: "#000000" }}>
@@ -95,6 +104,7 @@ export function HeaderMenu({ theme, open, handleDrawerOpen, handleDrawerClose })
                 </DrawerHeader>
                 <Divider sx={{ width: "85%", textAlign: "center", margin: "0 auto" }} />
                 <Typography
+                    variant="h6"
                     style={{ width: "260px", textAlign: "left", padding: theme.spacing(2, 3) }}
                     fontWeight="fontWeightBold"
                 >
@@ -106,11 +116,17 @@ export function HeaderMenu({ theme, open, handleDrawerOpen, handleDrawerClose })
                 </Typography>
                 <Divider sx={{ width: "85%", textAlign: "center", margin: "0 auto" }} />
 
+                <AddWorkForm
+                    theme={theme}
+                    handleInputChange={handleInputChange}
+                    newArtwork={newArtwork}
+                    handleAddArtwork={handleAddArtwork}
+                />
+
                 <Button
-                    variant="contained"
+                    variant="outlined"
                     sx={{
-                        bgcolor: "black",
-                        color: "white",
+                        color: "black",
                         boxShadow: 3,
                         width: "85%",
                         margin: "0 auto",
@@ -131,4 +147,7 @@ HeaderMenu.propTypes = {
     handleDrawerOpen: PropTypes.func,
     handleDrawerClose: PropTypes.func,
     theme: PropTypes.object,
+    handleInputChange: PropTypes.func,
+    newArtwork: PropTypes.object,
+    handleAddArtwork: PropTypes.func,
 };

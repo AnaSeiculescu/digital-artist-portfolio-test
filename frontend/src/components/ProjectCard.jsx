@@ -23,7 +23,6 @@ export function ProjectCard({ title, description, image, clientlink }) {
                 // alt={alt}
                 sx={{
                     boxShadow: "1",
-                    // width: "330px",
                 }}
             />
             <CardContent
