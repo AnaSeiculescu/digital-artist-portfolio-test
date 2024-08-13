@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ProjectCard } from "./ProjectCard";
 import Box from "@mui/material/Box";
 import { HeaderMenu } from "./HeaderMenu";
+import { styled, useTheme } from "@mui/material/styles";
 
 export function ArtworksManager() {
     const [artworks, setArtworks] = useState([]);
@@ -93,14 +94,48 @@ export function ArtworksManager() {
         justifyContent: "space-around",
     };
 
+    const drawerWidth = 240;
+    const theme = useTheme();
+    const [open, setOpen] = useState(false);
+    const handleDrawerOpen = () => {
+        setOpen(true);
+    };
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
+
+    const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(({ theme, open }) => ({
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create("margin", {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        marginLeft: `-${drawerWidth}px`,
+        ...(open && {
+            transition: theme.transitions.create("margin", {
+                easing: theme.transitions.easing.easeOut,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+            marginLeft: 0,
+        }),
+    }));
+
     return (
         <Box sx={{ width: "100vw" }}>
             <Stack sx={{ artworksStyle }}>
-                <HeaderMenu />
+                <HeaderMenu
+                    open={open}
+                    handleDrawerOpen={handleDrawerOpen}
+                    handleDrawerClose={handleDrawerClose}
+                    theme={theme}
+                >
+                    <Main open={open}></Main>
+                </HeaderMenu>
                 <ResponsiveMasonry
                     // columnsCountBreakPoints={{ 480: 1, 768: 2, 1100: 3, 1380: 4, 1690: 5 }}
                     columnsCountBreakPoints={{ 380: 1, 550: 2, 930: 3, 1350: 4, 1750: 5 }}
-                    style={{ margin: "25px 25px 25px 30px" }}
+                    style={{ margin: "120px 25px 25px 30px" }}
                 >
                     <Masonry gutter="20px">
                         {artworks.map((artwork) => (
