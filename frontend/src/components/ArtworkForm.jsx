@@ -13,7 +13,6 @@ export function ArtworkForm({ newArtwork, handleInputChange, inputStyle, labelSt
                 <TextField
                     id="outlined-required"
                     size="small"
-                    // disabled={isLoading}
                     name="title"
                     value={newArtwork.title}
                     onChange={(event) => handleInputChange(event)}
@@ -28,7 +27,6 @@ export function ArtworkForm({ newArtwork, handleInputChange, inputStyle, labelSt
                 <TextField
                     id="standard-multiline-static"
                     size="small"
-                    // disabled={isLoading}
                     name="description"
                     value={newArtwork.description}
                     onChange={(event) => handleInputChange(event)}
@@ -44,7 +42,6 @@ export function ArtworkForm({ newArtwork, handleInputChange, inputStyle, labelSt
                 <TextField
                     id="outlined-required"
                     size="small"
-                    // disabled={isLoading}
                     name="image"
                     value={newArtwork.image}
                     onChange={(event) => handleInputChange(event)}
@@ -59,7 +56,6 @@ export function ArtworkForm({ newArtwork, handleInputChange, inputStyle, labelSt
                 <TextField
                     id="outlined-required"
                     size="small"
-                    // disabled={isLoading}
                     name="clientlink"
                     value={newArtwork.clientlink}
                     onChange={(event) => handleInputChange(event)}

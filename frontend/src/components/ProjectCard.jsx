@@ -11,6 +11,7 @@ import { UpdateDeleteArtwork } from "./UpdateDeleteArtwork";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export function ProjectCard({
     title,
@@ -19,6 +20,7 @@ export function ProjectCard({
     clientlink,
     handleDeleteArtwork,
     handleUpdateArtwork,
+    isLoadingUpdate,
     id,
     inputStyle,
     labelStyle,
@@ -66,7 +68,6 @@ export function ProjectCard({
                         <TextField
                             id="outlined-required"
                             size="small"
-                            // disabled={isLoading}
                             name="title"
                             value={artworkData.title}
                             onChange={(event) => handleInputUpdate(event)}
@@ -81,7 +82,6 @@ export function ProjectCard({
                         <TextField
                             id="standard-multiline-static"
                             size="small"
-                            // disabled={isLoading}
                             name="description"
                             value={artworkData.description}
                             onChange={(event) => handleInputUpdate(event)}
@@ -97,7 +97,6 @@ export function ProjectCard({
                         <TextField
                             id="outlined-required"
                             size="small"
-                            // disabled={isLoading}
                             name="image"
                             value={artworkData.image}
                             onChange={(event) => handleInputUpdate(event)}
@@ -112,7 +111,6 @@ export function ProjectCard({
                         <TextField
                             id="outlined-required"
                             size="small"
-                            // disabled={isLoading}
                             name="clientlink"
                             value={artworkData.clientlink}
                             onChange={(event) => handleInputUpdate(event)}
@@ -123,6 +121,7 @@ export function ProjectCard({
 
                     <Button
                         variant="contained"
+                        disabled={isLoadingUpdate}
                         sx={{
                             bgcolor: "black",
                             color: "white",
@@ -134,6 +133,7 @@ export function ProjectCard({
                         }}
                         onClick={handleSaveUpdate}
                     >
+                        {isLoadingUpdate && <CircularProgress size={25} sx={{ marginRight: "7px" }} />}
                         Save
                     </Button>
                 </Stack>
@@ -200,4 +200,5 @@ ProjectCard.propTypes = {
     artwork: PropTypes.object,
     inputStyle: PropTypes.object,
     labelStyle: PropTypes.object,
+    isLoadingUpdate: PropTypes.bool,
 };

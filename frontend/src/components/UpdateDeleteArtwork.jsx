@@ -4,6 +4,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import ToggleButton from "@mui/material/ToggleButton";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 export function UpdateDeleteArtwork({ id, handleDeleteArtwork, editing, handleEditArtworkBtn }) {
     return (

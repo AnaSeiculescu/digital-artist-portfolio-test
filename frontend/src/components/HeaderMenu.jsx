@@ -51,6 +51,7 @@ export function HeaderMenu({
     handleDeleteArtwork,
     inputStyle,
     labelStyle,
+    isLoadingAdd,
 }) {
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -117,6 +118,7 @@ export function HeaderMenu({
                     handleDeleteArtwork={handleDeleteArtwork}
                     labelStyle={labelStyle}
                     inputStyle={inputStyle}
+                    isLoadingAdd={isLoadingAdd}
                 />
 
                 <Button
@@ -149,4 +151,5 @@ HeaderMenu.propTypes = {
     handleDeleteArtwork: PropTypes.func,
     inputStyle: PropTypes.object,
     labelStyle: PropTypes.object,
+    isLoadingAdd: PropTypes.bool,
 };

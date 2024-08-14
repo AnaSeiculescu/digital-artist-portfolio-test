@@ -8,7 +8,8 @@ import { styled, useTheme } from "@mui/material/styles";
 
 export function ArtworksManager() {
     const [artworks, setArtworks] = useState([]);
-    // const [loading, setLoading] = useState(true);
+    const [isLoadingAdd, setIsLoadingAdd] = useState(false);
+    const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
     const [newArtwork, setNewArtwork] = useState({
         title: "",
         description: "",
@@ -26,11 +27,9 @@ export function ArtworksManager() {
             .then((data) => {
                 setArtworks(data);
                 console.log("data este: ", data);
-                // setLoading(false);
             })
             .catch((error) => {
                 console.log("error: ", error);
-                // setLoading(false);
             });
     }, []);
 
@@ -43,6 +42,7 @@ export function ArtworksManager() {
     };
 
     const addArtwork = () => {
+        setIsLoadingAdd(true);
         fetch(createURL, {
             method: "POST",
             headers: {
@@ -54,11 +54,13 @@ export function ArtworksManager() {
             .then((data) => {
                 setArtworks([...artworks, data]);
                 setNewArtwork({ title: "", description: "", image: "", clientlink: "", is_visible: true });
+                setIsLoadingAdd(false);
             })
             .catch((error) => console.log("error: ", error));
     };
 
     const updateArtwork = (id, updatedArtwork) => {
+        setIsLoadingUpdate(true);
         return fetch(`http://localhost:3000/artworks/${id}`, {
             method: "PATCH",
             headers: {
@@ -69,6 +71,7 @@ export function ArtworksManager() {
             .then((response) => response.json())
             .then((data) => {
                 setArtworks(artworks.map((artwork) => (artwork.id === id ? data : artwork)));
+                setIsLoadingUpdate(false);
             })
             .catch((error) => console.log("error: ", error));
     };
@@ -141,6 +144,7 @@ export function ArtworksManager() {
                     handleAddArtwork={addArtwork}
                     inputStyle={inputStyle}
                     labelStyle={labelStyle}
+                    isLoadingAdd={isLoadingAdd}
                 >
                     <Main open={open}></Main>
                 </HeaderMenu>
@@ -160,6 +164,7 @@ export function ArtworksManager() {
                                 handleDeleteArtwork={deleteArtwork}
                                 theme={theme}
                                 handleUpdateArtwork={updateArtwork}
+                                isLoadingUpdate={isLoadingUpdate}
                                 handleInputChange={handleInputChange}
                                 inputStyle={inputStyle}
                                 labelStyle={labelStyle}

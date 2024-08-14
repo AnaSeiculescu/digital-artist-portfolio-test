@@ -3,8 +3,17 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import { Button } from "@mui/material";
 import { ArtworkForm } from "./ArtworkForm";
+import CircularProgress from "@mui/material/CircularProgress";
 
-export function AddWorkForm({ theme, handleInputChange, newArtwork, handleAddArtwork, inputStyle, labelStyle }) {
+export function AddWorkForm({
+    theme,
+    handleInputChange,
+    newArtwork,
+    handleAddArtwork,
+    inputStyle,
+    labelStyle,
+    isLoadingAdd,
+}) {
     return (
         <Stack>
             <Typography variant="subtitle2" sx={{ margin: "25px 0", padding: theme.spacing(1, 3), fontWeight: "600" }}>
@@ -19,7 +28,7 @@ export function AddWorkForm({ theme, handleInputChange, newArtwork, handleAddArt
             />
             <Button
                 variant="contained"
-                // disabled={isLoading}
+                disabled={isLoadingAdd}
                 sx={{
                     bgcolor: "black",
                     color: "white",
@@ -31,6 +40,7 @@ export function AddWorkForm({ theme, handleInputChange, newArtwork, handleAddArt
                 }}
                 onClick={handleAddArtwork}
             >
+                {isLoadingAdd && <CircularProgress size={25} sx={{ marginRight: "7px" }} />}
                 Add work
             </Button>
         </Stack>
@@ -44,4 +54,5 @@ AddWorkForm.propTypes = {
     handleAddArtwork: PropTypes.func,
     inputStyle: PropTypes.object,
     labelStyle: PropTypes.object,
+    isLoadingAdd: PropTypes.bool,
 };
