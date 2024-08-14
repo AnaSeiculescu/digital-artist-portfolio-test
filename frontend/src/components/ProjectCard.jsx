@@ -18,6 +18,7 @@ export function ProjectCard({
     description,
     image,
     clientlink,
+    is_visible,
     handleDeleteArtwork,
     handleUpdateArtwork,
     isLoadingUpdate,
@@ -26,14 +27,16 @@ export function ProjectCard({
     labelStyle,
 }) {
     const [artworkData, setArtworkData] = useState({
+        id: id,
         title: title,
         description: description,
         image: image,
         clientlink: clientlink,
-        is_visible: true,
+        is_visible: is_visible,
     });
 
     const [editing, setEditing] = useState(false);
+    const [isVisible, setIsVisible] = useState(artworkData.is_visible);
 
     const handleEditArtworkBtn = () => {
         setEditing(!editing);
@@ -52,13 +55,40 @@ export function ProjectCard({
         setEditing(false);
     };
 
+    const artworkStyle = {
+        position: "relative",
+        boxShadow: "4",
+        opacity: isVisible ? 1 : 0.55,
+        transition: "opacity 0.3s ease",
+    };
+
+    const toggleVisibility = () => {
+        const updatedVisibility = !isVisible;
+        setIsVisible(updatedVisibility);
+        // if (!isVisible) {
+        //     artworkStyle.opacity = "0.6";
+        // }
+
+        if (updatedVisibility !== undefined && artworkData.id) {
+            fetch(`http://localhost:3000/artworks/${artworkData.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ is_visible: updatedVisibility }),
+            })
+                .then((response) => response.json())
+                .then((updatedArtworkVisibility) => {
+                    console.log("visibility updated: ", updatedArtworkVisibility);
+                })
+                .catch((error) => console.log("error: ", error));
+        } else {
+            console.log("Invalid visibility value or artwork ID:", updatedVisibility, artworkData.id);
+        }
+    };
+
     return (
-        <Card
-            sx={{
-                position: "relative",
-                boxShadow: "4",
-            }}
-        >
+        <Card sx={artworkStyle}>
             {editing ? (
                 <Stack justifyContent="center" sx={{ paddingTop: "20px" }}>
                     <Stack>
@@ -180,6 +210,8 @@ export function ProjectCard({
                         handleDeleteArtwork={handleDeleteArtwork}
                         editing={editing}
                         handleEditArtworkBtn={handleEditArtworkBtn}
+                        toggleVisibility={toggleVisibility}
+                        isVisible={isVisible}
                     />
                 </>
             )}
@@ -192,6 +224,7 @@ ProjectCard.propTypes = {
     image: PropTypes.string,
     description: PropTypes.string,
     clientlink: PropTypes.string,
+    is_visible: PropTypes.bool,
     handleDeleteArtwork: PropTypes.func,
     handleUpdateArtwork: PropTypes.func,
     id: PropTypes.number,

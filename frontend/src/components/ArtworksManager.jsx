@@ -161,6 +161,7 @@ export function ArtworksManager() {
                                 description={artwork.description}
                                 image={artwork.image}
                                 clientlink={artwork.clientlink}
+                                is_visible={artwork.is_visible}
                                 handleDeleteArtwork={deleteArtwork}
                                 theme={theme}
                                 handleUpdateArtwork={updateArtwork}
