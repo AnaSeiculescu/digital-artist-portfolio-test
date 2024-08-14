@@ -15,10 +15,22 @@ It features a React-based frontend for a responsive user interface and a NestJS 
 6. Navigate to the `frontend` directory and run the `npm run dev` command to start the frontend/Vite development server.
 7. Open the browser at the URL provided by Vite (`http://localhost:port_provided`) to view the application.
 
-## Project Overview
+## Short Presentation
 
-This project is a web application for managing and displaying the work of a digital artist, built using a modern JavaScript stack.
-It features a React-based frontend for a responsive user interface and a NestJS backend that handles API requests and database interactions.
+-   The app displays the projects using `masonry-layout`.
+-   The header menu bar opens a drawer where the artist can add projects to his portfolio.
+-   The projects displayed have image, title, description, the client site link to visit, and functionalities such as:
+    -   hidding the project from the list,
+    -   updating the project,
+    -   deleting the project from the list.
+
+## Unrealized Functionalities
+
+Your test has some requirements that I did not manage to implement:
+
+-   First, it seems like the application should have had an admin account and a user account. I have only focused on the admin account, where the artwork can be managed.
+-   The image upload functionality is not implemented.
+-   My project does not have testing included.
 
 ## Tools and Technologies Used
 
