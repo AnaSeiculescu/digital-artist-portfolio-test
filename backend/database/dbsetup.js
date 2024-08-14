@@ -28,7 +28,8 @@ async function run() {
     await dbClient("artistwork").insert([
         {
             title: "among trees",
-            description: "nature and mystery under the colorful light, playing and dancing for the Earth",
+            description:
+                "nature and mystery under the colorful light, playing and dancing for the Earth; it is unknown what we should expect as it will not share with us nothing but sensations",
             image: "/images/among-trees.jpg",
             clientlink: "https://www.deviantart.com/freya-passifolle/art/Among-Trees-Small-Group-884376795",
             is_visible: true,

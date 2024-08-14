@@ -18,7 +18,7 @@ It features a React-based frontend for a responsive user interface and a NestJS 
 ## Short Presentation
 
 -   The app displays the projects using `masonry-layout`.
--   The header menu bar opens a drawer where the artist can add projects to his portfolio.
+-   The header menu bar opens a vertical panel with a form where the artist can add projects to his portfolio.
 -   The projects displayed have image, title, description, the client site link to visit, and functionalities such as:
     -   hidding the project from the list,
     -   updating the project,
