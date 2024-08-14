@@ -65,9 +65,6 @@ export function ProjectCard({
     const toggleVisibility = () => {
         const updatedVisibility = !isVisible;
         setIsVisible(updatedVisibility);
-        // if (!isVisible) {
-        //     artworkStyle.opacity = "0.6";
-        // }
 
         if (updatedVisibility !== undefined && artworkData.id) {
             fetch(`http://localhost:3000/artworks/${artworkData.id}`, {

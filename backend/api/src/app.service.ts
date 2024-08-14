@@ -21,16 +21,13 @@ export class AppService {
     });
   }
 
-  getHello(): string {
-    const rezultat = Math.random() * 20 + 15;
-    return 'rezultatul este ' + rezultat;
-  }
-
   async getAllArtwork(showOnlyVisible: boolean) {
-    let command = 'select * from artistwork';
+    let command = 'select * from artistwork order by id asc';
     if (showOnlyVisible) {
       command += ' where is_visible = true';
     }
+
+    // command += ' order by id';
 
     const allWork = await this.dbClient.raw(command);
     // console.log('toata munca: ', allWork.rows);

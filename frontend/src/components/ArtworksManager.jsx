@@ -56,7 +56,10 @@ export function ArtworksManager() {
                 setNewArtwork({ title: "", description: "", image: "", clientlink: "", is_visible: true });
                 setIsLoadingAdd(false);
             })
-            .catch((error) => console.log("error: ", error));
+            .catch((error) => {
+                console.log("error: ", error);
+                setIsLoadingAdd(false);
+            });
     };
 
     const updateArtwork = (id, updatedArtwork) => {
@@ -70,10 +73,18 @@ export function ArtworksManager() {
         })
             .then((response) => response.json())
             .then((data) => {
-                setArtworks(artworks.map((artwork) => (artwork.id === id ? data : artwork)));
+                // console.log("Fetched Data:", data);
+                setArtworks((prevArtworks) => {
+                    const updatedArtworks = prevArtworks.map((artwork) => (artwork.id === id ? data : artwork));
+                    // console.log("Updated Artworks:", updatedArtworks);
+                    return updatedArtworks;
+                });
                 setIsLoadingUpdate(false);
             })
-            .catch((error) => console.log("error: ", error));
+            .catch((error) => {
+                console.log("error: ", error);
+                setIsLoadingUpdate(false);
+            });
     };
 
     const deleteArtwork = (id) => {
