@@ -1,4 +1,3 @@
-// import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -37,7 +36,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
     display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 3),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "space-between",
 }));
@@ -51,6 +49,8 @@ export function HeaderMenu({
     newArtwork,
     handleAddArtwork,
     handleDeleteArtwork,
+    inputStyle,
+    labelStyle,
 }) {
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -73,7 +73,6 @@ export function HeaderMenu({
                     >
                         Ana&apos;s work art collection
                     </Typography>
-                    {/* <Button color="inherit">Login</Button> */}
                 </Toolbar>
             </AppBar>
 
@@ -96,9 +95,6 @@ export function HeaderMenu({
                 open={open}
             >
                 <DrawerHeader>
-                    {/* <Typography fontWeight="fontWeightBold" variant="h5">
-                        Ana&apos;s work art collection
-                    </Typography> */}
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === "ltr" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                     </IconButton>
@@ -110,10 +106,6 @@ export function HeaderMenu({
                     fontWeight="fontWeightBold"
                 >
                     Welcome, Ana
-                    {/* {userInput.username} */}
-                    {/* <Typography style={{ fontSize: "14px" }} color={mySecondaryColor}>
-                        Sort your todos by date using the view on the right
-                    </Typography> */}
                 </Typography>
                 <Divider sx={{ width: "85%", textAlign: "center", margin: "0 auto" }} />
 
@@ -123,6 +115,8 @@ export function HeaderMenu({
                     newArtwork={newArtwork}
                     handleAddArtwork={handleAddArtwork}
                     handleDeleteArtwork={handleDeleteArtwork}
+                    labelStyle={labelStyle}
+                    inputStyle={inputStyle}
                 />
 
                 <Button
@@ -135,7 +129,7 @@ export function HeaderMenu({
                         marginTop: "auto",
                         marginBottom: "100px",
                     }}
-                    // onClick={handleLogOut}
+                    // onClick={}
                 >
                     Sign out
                 </Button>
@@ -153,4 +147,6 @@ HeaderMenu.propTypes = {
     newArtwork: PropTypes.object,
     handleAddArtwork: PropTypes.func,
     handleDeleteArtwork: PropTypes.func,
+    inputStyle: PropTypes.object,
+    labelStyle: PropTypes.object,
 };

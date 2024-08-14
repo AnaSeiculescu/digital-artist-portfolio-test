@@ -9,7 +9,6 @@ import { styled, useTheme } from "@mui/material/styles";
 export function ArtworksManager() {
     const [artworks, setArtworks] = useState([]);
     // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(null);
     const [newArtwork, setNewArtwork] = useState({
         title: "",
         description: "",
@@ -19,7 +18,6 @@ export function ArtworksManager() {
     });
 
     const readAllURL = "http://localhost:3000/artworks/all";
-    // const update_delete_URL = `http://localhost:3000/artworks/${id}`;
     const createURL = "http://localhost:3000/artworks";
 
     useEffect(() => {
@@ -32,7 +30,6 @@ export function ArtworksManager() {
             })
             .catch((error) => {
                 console.log("error: ", error);
-                // setError(error);
                 // setLoading(false);
             });
     }, []);
@@ -61,20 +58,20 @@ export function ArtworksManager() {
             .catch((error) => console.log("error: ", error));
     };
 
-    // const updateArtwork = (id, updatedArtwork) => {
-    //     fetch(update_delete_URL, {
-    //         method: "PATCH",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(updatedArtwork),
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             setArtworks(artworks.map((artwork) => (artwork.id === id ? data : artwork)));
-    //         })
-    //         .catch((error) => console.log("error: ", error));
-    // };
+    const updateArtwork = (id, updatedArtwork) => {
+        return fetch(`http://localhost:3000/artworks/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedArtwork),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setArtworks(artworks.map((artwork) => (artwork.id === id ? data : artwork)));
+            })
+            .catch((error) => console.log("error: ", error));
+    };
 
     const deleteArtwork = (id) => {
         fetch(`http://localhost:3000/artworks/${id}`, {
@@ -86,6 +83,7 @@ export function ArtworksManager() {
             .catch((error) => console.log("error: ", error));
     };
 
+    const theme = useTheme();
     const artworksStyle = {
         width: "100%",
         position: "relative",
@@ -94,8 +92,17 @@ export function ArtworksManager() {
         justifyContent: "space-around",
     };
 
+    const inputStyle = {
+        marginBottom: "21px",
+        padding: theme.spacing(0, 1),
+    };
+    const labelStyle = {
+        margin: "0 50px 0 7px",
+        fontSize: "14px",
+        padding: theme.spacing(0, 4),
+    };
+
     const drawerWidth = 240;
-    const theme = useTheme();
     const [open, setOpen] = useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -132,11 +139,12 @@ export function ArtworksManager() {
                     handleInputChange={handleInputChange}
                     newArtwork={newArtwork}
                     handleAddArtwork={addArtwork}
+                    inputStyle={inputStyle}
+                    labelStyle={labelStyle}
                 >
                     <Main open={open}></Main>
                 </HeaderMenu>
                 <ResponsiveMasonry
-                    // columnsCountBreakPoints={{ 480: 1, 768: 2, 1100: 3, 1380: 4, 1690: 5 }}
                     columnsCountBreakPoints={{ 380: 1, 550: 2, 930: 3, 1350: 4, 1750: 5 }}
                     style={{ margin: "120px 25px 25px 30px" }}
                 >
@@ -148,9 +156,13 @@ export function ArtworksManager() {
                                 title={artwork.title}
                                 description={artwork.description}
                                 image={artwork.image}
-                                // alt={artwork.alt}
                                 clientlink={artwork.clientlink}
                                 handleDeleteArtwork={deleteArtwork}
+                                theme={theme}
+                                handleUpdateArtwork={updateArtwork}
+                                handleInputChange={handleInputChange}
+                                inputStyle={inputStyle}
+                                labelStyle={labelStyle}
                             ></ProjectCard>
                         ))}
                     </Masonry>
