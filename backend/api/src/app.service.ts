@@ -46,6 +46,10 @@ export class AppService {
     return newArtwork[0];
   }
 
+  // async uploadImage(data: any) {
+  //   const newImage = await this.
+  // }
+
   async updateArtwork(id: number, data: any) {
     const updateArtwork = await this.dbClient('artistwork')
       .where({ id })

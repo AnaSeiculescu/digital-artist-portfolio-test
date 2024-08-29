@@ -33,7 +33,7 @@ export function AddWorkForm({
                     bgcolor: "black",
                     color: "white",
                     boxShadow: 3,
-                    width: "85%",
+                    width: "70%",
                     margin: "0 auto",
                     marginTop: "auto",
                     marginBottom: "100px",

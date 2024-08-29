@@ -31,6 +31,11 @@ export class AppController {
     return this.appService.createArtwork(data);
   }
 
+  // @Post('/')
+  // uploadImage(@     () data:any) {
+  //   return this.appService.uploadImage(data);
+  // }
+
   @Patch('/:id')
   updateArtwork(@Param('id') id: number, @Body() data: any) {
     return this.appService.updateArtwork(id, data);
