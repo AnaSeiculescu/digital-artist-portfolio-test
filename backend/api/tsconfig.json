@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    // "importsNotUsedAsValues": "remove",
+    // "isolatedModules": true,
+    // "esModuleInterop": true,
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,

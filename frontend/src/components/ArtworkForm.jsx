@@ -15,10 +15,27 @@ export function ArtworkForm({ newArtwork, handleInputChange, inputStyle, labelSt
             return;
         }
 
-        const fd = new FormData();
-        fd.append("file", files);
+        const formData = new FormData();
+        formData.append("file", files);
 
         setMsg("Uploading...");
+
+        fetch("http://localhost:3000/upload", {
+            method: "POST",
+            body: FormData,
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("Bad Response");
+                }
+                setMsg("Uploaded successful");
+                return res.json();
+            })
+            .then((data) => console.log("data: ", data))
+            .catch((err) => {
+                setMsg("Uploaded failed");
+                console.log("error: ", err);
+            });
     }
     return (
         <Stack>
@@ -51,7 +68,7 @@ export function ArtworkForm({ newArtwork, handleInputChange, inputStyle, labelSt
                 />
             </Stack>
 
-            <Stack sx={{ marginBottom: "20px", textAlign: "center" }}>
+            <Stack>
                 <Typography fontWeight="fontWeightBold" sx={labelStyle}>
                     Image:
                 </Typography>
@@ -66,24 +83,26 @@ export function ArtworkForm({ newArtwork, handleInputChange, inputStyle, labelSt
                     sx={inputStyle}
                     multiple
                 />
-                {msg && <span>{msg}</span>}
-                <Button
-                    variant="outlined"
-                    // disabled={isLoadingAdd}
-                    sx={{
-                        // bgcolor: "black",
-                        color: "black",
-                        boxShadow: 3,
-                        width: "70%",
-                        margin: "0 auto",
-                        marginTop: "auto",
-                        marginBottom: "10px",
-                    }}
-                    onClick={handleUpload}
-                >
-                    {/* {isLoadingAdd && <CircularProgress size={25} sx={{ marginRight: "7px" }} />} */}
-                    Upload
-                </Button>
+                <Stack sx={{ marginBottom: "20px", textAlign: "center" }}>
+                    {msg && <span>{msg}</span>}
+                    <Button
+                        variant="outlined"
+                        // disabled={isLoadingAdd}
+                        sx={{
+                            // bgcolor: "black",
+                            color: "black",
+                            boxShadow: 3,
+                            width: "70%",
+                            margin: "0 auto",
+                            marginTop: "auto",
+                            marginBottom: "10px",
+                        }}
+                        onClick={handleUpload}
+                    >
+                        {/* {isLoadingAdd && <CircularProgress size={25} sx={{ marginRight: "7px" }} />} */}
+                        Upload
+                    </Button>
+                </Stack>
             </Stack>
 
             <Stack>

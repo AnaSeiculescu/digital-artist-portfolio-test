@@ -7,8 +7,13 @@ import {
   Body,
   Post,
   Delete,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AppService } from './app.service';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @Controller('/artworks')
 export class AppController {
@@ -31,11 +36,6 @@ export class AppController {
     return this.appService.createArtwork(data);
   }
 
-  // @Post('/')
-  // uploadImage(@     () data:any) {
-  //   return this.appService.uploadImage(data);
-  // }
-
   @Patch('/:id')
   updateArtwork(@Param('id') id: number, @Body() data: any) {
     return this.appService.updateArtwork(id, data);
@@ -44,5 +44,27 @@ export class AppController {
   @Delete('/:id')
   deleteArtwork(@Param('id') id: number) {
     return this.appService.deleteArtwork(id);
+  }
+}
+
+@Controller('upload')
+export class UploadController {
+  @Post()
+  @UseInterceptors(
+    FileInterceptor('files', {
+      storage: diskStorage({
+        destination: './uploads', // Directory where files will be saved
+        filename: (req, file, callback) => {
+          const uniqueSuffix =
+            Date.now() + '-' + Math.round(Math.random() * 1e9);
+          const ext = extname(file.originalname); // Extract the file extension
+          callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+        },
+      }),
+    }),
+  )
+  uploadFile(@UploadedFile() file: Express.Multer.File) {
+    console.log('File received:', file);
+    return { message: 'File uploaded successfully!' };
   }
 }
