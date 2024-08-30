@@ -9,6 +9,7 @@ import {
   Delete,
   UploadedFile,
   UseInterceptors,
+  BadRequestException,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -51,20 +52,35 @@ export class AppController {
 export class UploadController {
   @Post()
   @UseInterceptors(
-    FileInterceptor('files', {
+    FileInterceptor('file', {
       storage: diskStorage({
         destination: './uploads', // Directory where files will be saved
         filename: (req, file, callback) => {
-          const uniqueSuffix =
-            Date.now() + '-' + Math.round(Math.random() * 1e9);
-          const ext = extname(file.originalname); // Extract the file extension
-          callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
+          const filename = `${Date.now()}${extname(file.originalname)}`;
+          callback(null, filename);
+          // const uniqueSuffix =
+          //   Date.now() + '-' + Math.round(Math.random() * 1e9);
+          // const ext = extname(file.originalname);
+          // callback(null, `${file.fieldname}-${uniqueSuffix}${ext}`);
         },
       }),
     }),
   )
   uploadFile(@UploadedFile() file: Express.Multer.File) {
     console.log('File received:', file);
-    return { message: 'File uploaded successfully!' };
+    if (!file) {
+      console.error('No file received');
+      throw new BadRequestException('File not uploaded');
+    }
+    console.log('File details:', {
+      originalname: file.originalname,
+      filename: file.filename,
+      path: file.path,
+      mimetype: file.mimetype,
+    });
+    return {
+      message: 'File uploaded successfully',
+      filename: file.filename,
+    };
   }
 }

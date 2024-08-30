@@ -6,34 +6,38 @@ import { useState } from "react";
 import { Button } from "@mui/material";
 
 export function ArtworkForm({ newArtwork, handleInputChange, inputStyle, labelStyle }) {
-    const [files, setFiles] = useState(null);
+    const [file, setFiles] = useState(null);
     const [msg, setMsg] = useState(null);
 
     function handleUpload() {
-        if (!files) {
+        if (!file) {
             setMsg("No file selected!");
             return;
         }
 
         const formData = new FormData();
-        formData.append("file", files);
+        formData.append("file", file);
+        console.log("formData: ", formData);
 
         setMsg("Uploading...");
 
         fetch("http://localhost:3000/upload", {
             method: "POST",
-            body: FormData,
+            body: formData,
+            header: {
+                "Content-Type": "multipart/form-data",
+            },
         })
             .then((res) => {
                 if (!res.ok) {
                     throw new Error("Bad Response");
                 }
-                setMsg("Uploaded successful");
+                setMsg("Upload successful");
                 return res.json();
             })
             .then((data) => console.log("data: ", data))
             .catch((err) => {
-                setMsg("Uploaded failed");
+                setMsg("Upload failed");
                 console.log("error: ", err);
             });
     }
@@ -76,9 +80,9 @@ export function ArtworkForm({ newArtwork, handleInputChange, inputStyle, labelSt
                     id="outlined-required"
                     size="small"
                     name="image"
-                    value={newArtwork.image}
+                    // value={newArtwork.image}
                     // onChange={(event) => handleInputChange(event)}
-                    onChange={(event) => setFiles(event.target.files)}
+                    onChange={(event) => setFiles(event.target.files[0])}
                     type="file"
                     sx={inputStyle}
                     multiple
